@@ -24,6 +24,13 @@ public class SubActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        int position = getIntent().getIntExtra(TitlesFragment.EXTRA_POSITION, 0);
+        DetailFragment detailFragment = DetailFragment.newInstance(position);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.detailFrame, detailFragment)
+                .commit();
     }
 
 }
