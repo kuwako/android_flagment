@@ -14,6 +14,7 @@ import android.widget.ListView;
 public class TitlesFragment extends ListFragment {
     public TitlesFragment() {}
     public final static String EXTRA_POSITION = "com.example.kuwako.myflagmentapp.POSITION";
+    private OnTitleSelectedListener lister;
 
     public interface OnTitleSelectedListener {
         public void onTitleSelected(int position);
@@ -28,8 +29,14 @@ public class TitlesFragment extends ListFragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement onTitleSelected");
         }
-
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        lister = null;
+    }
+
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
