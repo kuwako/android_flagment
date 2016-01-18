@@ -1,5 +1,6 @@
 package com.example.kuwako.myflagmentapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -14,6 +15,21 @@ public class TitlesFragment extends ListFragment {
     public TitlesFragment() {}
     public final static String EXTRA_POSITION = "com.example.kuwako.myflagmentapp.POSITION";
 
+    public interface OnTitleSelectedListener {
+        public void onTitleSelected(int position);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            lister = (OnTitleSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onTitleSelected");
+        }
+
+    }
     @Override
     public void onActivityCreated (Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
